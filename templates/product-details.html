@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+  {% block content %}
+      <div class="row wow fadeIn "style="margin-top: 5rem;">
+        <div class="col-md-6 mb-4 mt-4">
+          <img src="{{item.image.url}}" class="img-fluid" alt="" width="400" height="300">
+        </div>
+        <div class="col-md-6 mb-4 mt-4">
+          <div class="p-4">
+            <div class="mb-3">
+              <a href="">
+                <span class="badge purple mr-1">{{item.category.title}}</span>
+              </a>
+            </div>
+            <p class="lead">
+              <span class="mr-1">
+                {% if item.old_price   %}
+                  <del>KES. {{item.old_price}}</del>
+                {% endif %}
+              </span>
+              <span>KES. {{item.new_price}}</span>
+            </p>
+            <p class="lead font-weight-bold">Description</p>
+            <div class="card mb-3 mt-1">
+              <p class="card-text p-3">{{item.description}}</p>
+            </div>
+            
+            <!-- <form class="d-flex justify-content-left">
+              <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
+              <button class="btn btn-primary btn-md my-0 p" type="submit">Add to cart
+                <i class="fas fa-shopping-cart ml-1"></i>
+              </button>
+            </form> -->
+            <a href="{{ item.get_add_to_cart_url }}" class="btn btn-primary btn-md my-0 p" type="submit">Add to cart
+              <i class="fas fa-shopping-cart ml-1"></i>
+            </a >
+            <!-- <a href="{{ item.get_remove_from_cart_url }}" class="btn btn-danger btn-md my-0 p" type="submit">Remove from cart  
+              <i class="fas fa-shopping-cart ml-1"></i>
+            </a > -->
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row d-flex justify-content-center wow fadeIn">
+        <div class="col-md-6 text-center">
+          <h4 class="my-4 h4">Related products</h4>
+        </div>
+      </div>
+      <div class="row wow fadeIn">
+        {% for item in related %}
+        <div class="col-lg-2 col-md-3 mb-4">
+          <a href="{% url 'details' item.id %}">
+            <img src="{{item.image.url}}" class="img-fluid" alt="" width="150px" height="150px">
+          </a>
+        </div>
+        {% endfor %}
+      </div>
+      {% endblock content %}

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+      {% block content %}
+      <section class="text-center mt-4 mb-4">
+        {% if data %}
+          <h4 class="text-muted mt-4 mb-4">Search results for <span>{{request.GET.q}}</span></h4>
+          <hr>
+          <div class="row wow fadeIn">
+            {% for item in data  %}
+            <div class="col-lg-2 col-md-3 col-sm-4 mb-4">
+              <div class="">
+                <div class="view overlay">
+                  {% if item.old_price%}
+                    <h2 class="badge badge-warning" 
+                    style="position: absolute; z-index: 999; font-size: small; margin: 0 auto; right: 0; top: 1%;">-{{item.get_item_discount}}%</h2>
+                  {% endif %}
+                  <a href="{% url 'details' item.id %}">
+                  <img href="" style="text-decoration: none;" src="{{item.image.url}}" class="card-img-top"
+                    alt="{{item.title}}" width="150px" height="150px"></a>
+                  <a href="">
+                    <div class="mask rgba-white-slight"></div>
+                  </a>
+                </div>
+                <div class="card-body text-center">
+                  <!-- <a href="{% url 'details' item.id %}" style="text-decoration: none;" class="grey-text">
+                    <h5>{{item.category.title}}</h5>
+                  </a>
+                  <h5> -->
+                    <strong>
+                      <a href="{% url 'details' item.id %}"
+                      class="text-muted" style="text-transform: capitalize; font-size: small;">{{item.title}}
+                        <!-- {% if item.discount%}
+                        <span class="badge badge-pill danger-color">-{{item.discount}}</span>
+                        {% endif %} -->
+                      </a>
+                    </strong>
+                  </h5>
+                  <a href="{% url 'details' item.id %}">
+                    <h4 class="font-weight-bold text-muted black-text" style="font-size: medium; ">
+                      {% if item.old_price%}
+                        <del class="text-muted" style="font-size: x-small;">KES{{item.old_price}}</del>
+                      {% endif %}
+                      <span>
+                        <strong>KES. {{item.new_price}}</strong>
+                      </span>
+                    </h4>
+                </a>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="container-fluid mt-5 pt-4">
+            <h4 class="text-muted mt-4 mb-4">{{request.GET.q}} not found</span></h4>
+          </div> 
+        {% endif %}  
+      </section>
+      {% endblock content %}
+
+      <!--Pagination-->
+
+ 

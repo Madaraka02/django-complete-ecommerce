@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  .small-img{
+    width: 70px;
+    height: 70px;
+  }
+</style>
+{% if order.items.all %}
+  <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Item title</th>
+            <th scope="col">Quantity
+            </th>
+            <th scope="col">Price</th>
+            <th scope="col">Total Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order_item in order.items.all %}
+              <tr>
+                  <th scope="row">
+                    <img src="{{order_item.item.image.url}}" alt="" class="rounded small-img">
+                  </th>
+                  <td>{{order_item.item.title}}</td>
+                  <td>
+                    <a href="{{order_item.item.get_remove_single_item_from_cart_url}}"><i class="fas fa-minus-circle mr-2"></i></a>
+                    {{order_item.quantity}}
+                    <a href="{{order_item.item.get_add_to_cart_url}}"><i class="fas fa-plus-circle ml-2"></i></a>
+                  </td>
+                  <td>{{order_item.item.price}}</td>
+                  <td>{{order_item.get_total_item_price}}
+                    <a href="{{order_item.item.get_remove_from_cart_url}}">
+                      <span class="float-right" style="color: red;"> <i class="fas fa-trash-alt"></i> </span>
+                    </a>
+                    
+                  </td>
+              </tr>
+          {% empty %}
+            <tr>
+              <td colspan="5">
+                <a href="{% url 'products' %}" class="btn btn-outline-secondary"> <i class="fa fa-arrow-left"></i>  Continue shopping</a>
+              </td>
+            </tr>
+          {% endfor %}
+          {% if order.get_total%}
+            <tr>
+              <td colspan="4">
+                Cart Total
+              </td>
+              <td colspan="1">
+                {{order.get_total}}
+              </td>
+            </tr>
+          <tr>
+            <td colspan="5">
+              <a href="{% url 'products' %}" class="btn btn-outline-secondary m-2"> <i class="fa fa-arrow-left"></i>  Continue shopping</a>
+              <a href="{% url 'checkout' %}" class="btn btn-outline-primary ml-4">Proceed to checkout <i class="fa fa-arrow-right"></i></a>
+            </td>
+          </tr>
+        {% endif %}
+        </tbody>
+      </table>
+    {% else %}
+      <h4 class="mt-5 pt-4">You have no items in the cart please add items</h4>
+      <a href="{% url 'products' %}" class="btn btn-outline-secondary"> <i class="fa fa-arrow-left"></i>  Continue shopping</a>
+    {% endif %}  
+  </div>
+{% endblock content%}

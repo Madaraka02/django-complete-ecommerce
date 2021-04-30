@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+  {% block nav %}
+      <nav class="navbar navbar-expand-lg navbar-light mt-3 mb-5">
+        <span class="navbar-brand">Featured Products</span>
+        <a class="nav-item ml-auto" href="{% url 'featured' %}" style="color: orange; font-size: smaller; margin-right: 2px;">
+          see all <i class="fa fa-angle-double-right" style="font-size: 2x;"></i></a>
+      </nav>
+  {% endblock nav %}
+  {% block content %}
+        <div class="row">
+          {% for item in items %}
+          <div class="col-lg-2 col-md-3 col-sm-4 mb-4">
+            <div class="">
+              <div class="view overlay">
+                {% if item.old_price%}
+                  <h2 class="badge badge-warning" 
+                  style="position: absolute; z-index: 999; margin: 0 auto; right: 0; top: 1%;">-{{item.get_item_discount}}%</h2>
+                {% endif %}
+                  <a href="{% url 'details' item.id %}" >
+                    <img src="{{item.image.url}}" class="card-img-top"
+                      alt="" width="150px" height="150px">
+                  </a>
+                  <div class="mask rgba-white-slight"></div>
+                </a>
+              </div>
+              <div class="mt-2">
+                <!-- <a href="{% url 'details' item.id %}" class="grey-text">
+                  <h5 style="font-size: small; text-transform: uppercase; letter-spacing: 3px;">{{item.category.title}}</h5>
+                </a>
+                <h5> -->
+                  <strong>
+                    <a href="{% url 'details' item.id %}" class="text-muted" style="text-transform: uppercase; font-size: small;">{{item.title}}
+                    </a>
+                  </strong>
+                </h5>
+                <a href="{% url 'details' item.id %}">
+                  <h4 class="font-weight-bold text-muted black-text" style="font-size: medium; ">
+                    {% if item.old_price%}
+                      <del class="text-muted" style="font-size: x-small;">KES{{item.old_price}}</del>
+                    {% endif %}
+                    <span>
+                      <strong>KES. {{item.new_price}}</strong>
+                    </span>
+                  </h4>
+              </a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-light mt-3 mb-5">
+          <span class="navbar-brand">BEST SELLERS</span>
+          <a class="nav-item ml-auto" href="{% url 'best_seller' %}" style="color: orange; font-size: smaller; margin-right: 2px;">
+            see all <i class="fa fa-angle-double-right" style="font-size: 2x;"></i></a>
+        </nav>
+        <!-- <div class="card">
+        <h4 class="text-center mt-3 mb-4" style="color: black; font-weight: bold;">BEST SELLERS
+          <span class="float-right" ><a href="{% url 'best_seller' %}" style="color: orange; font-size: smaller; margin-right: 2px;">see all <i class="fa fa-angle-double-right" style="font-size: 2x;"></i></a></span>
+        </h4>
+        <hr style="width: 30%; background-color: black;">
+      </div> -->
+        <div class="row mt-4">
+          {% for item in bests %}
+          <div class="col-lg-2 col-md-3 col-sm-4 mb-4">
+            <div class="">
+              <div class="view overlay">
+                {% if item.old_price%}
+                  <h2 class="badge badge-warning" 
+                  style="position: absolute; z-index: 999; margin: 0 auto; right: 0; top: 1%;">-{{item.get_item_discount}}%</h2>
+                {% endif %}
+                  <a href="{% url 'details' item.id %}" >
+                    <img src="{{item.image.url}}" class="card-img-top"
+                      alt="" width="150px" height="150px">
+                  </a>
+                  <div class="mask rgba-white-slight"></div>
+                </a>
+              </div>
+              <div class="mt-2">
+                <!-- <a href="{% url 'details' item.id %}" class="grey-text">
+                  <h5 style="font-size: small; text-transform: uppercase; letter-spacing: 3px;">{{item.category.title}}</h5>
+                </a>
+                <h5> -->
+                  <strong>
+                    <a href="{% url 'details' item.id %}" class="text-muted" style="text-transform: uppercase; font-size: small;">{{item.title}}
+                    </a>
+                  </strong>
+                </h5>
+                <a href="{% url 'details' item.id %}">
+                  <h4 class="font-weight-bold text-muted black-text" style="font-size: medium; ">
+                    {% if item.old_price%}
+                      <del class="text-muted" style="font-size: x-small;">KES{{item.old_price}}</del>
+                    {% endif %}
+                    <span>
+                      <strong>KES. {{item.new_price}}</strong>
+                    </span>
+                  </h4>
+              </a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      {% endblock content %}
+
