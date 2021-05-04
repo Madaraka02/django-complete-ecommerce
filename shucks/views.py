@@ -19,6 +19,12 @@ class catlistView(ListView):
         }
         return content
 
+def sendOrderToWhatsapp(request):
+    order = Order.objects.filter(user=request.user, ordered=False)
+    context = {
+        'order': order
+    }
+    return render(request, 'display.html', context)
 
 def home(request):
     items = Item.objects.filter(featured=True).order_by('-id')[:12]
