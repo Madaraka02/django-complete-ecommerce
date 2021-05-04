@@ -1,0 +1,18 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<!-- {% for order in order%}
+    Hi  I would like to order {{order.get_items}}.My total amount is {{order.get_total}}
+    
+{% endfor %}
+https://wa.link/fmrvbo -->
+    <h4 class="text-uppercase mt-4 mb-4">click the button below to send us your order</h4>
+    {% for order in order%}
+
+    <a class="btn btn-success " 
+    href="https://api.whatsapp.com/send?phone=254794111744&amp;text=Hi there!I would like to order:{{order.get_items}}My total is ksh{{order.get_total}}"
+     target="_blank" style="font-size: 1rem;">
+     <i class="fab fa-whatsapp"></i> Checkout to whatsapp
+    </a>
+    {% endfor %}
+{% endblock content %}    
