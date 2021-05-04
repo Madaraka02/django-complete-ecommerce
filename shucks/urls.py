@@ -3,12 +3,13 @@ from django.urls import path
 from .views import (
     home, checkoutView, cartView, search, add_to_cart, remove_from_cart, 
     products, details,remove_single_item_from_cart,
-    featured, best_seller, catlistView
+    featured, best_seller, catlistView, sendOrderToWhatsapp
 )
 
 urlpatterns = [
     path('', home, name='home'),
     path('featured/', featured, name='featured'),
+    path('whatsapp/', sendOrderToWhatsapp, name='Whatsapp'),
     path('best-seller/', best_seller, name='best_seller'),
     path('checkout/', checkoutView.as_view(), name='checkout'),
     path('cart/', cartView.as_view(), name='cart'),
